@@ -2,7 +2,12 @@ import os
 from pathlib import Path
 import dj_database_url
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+try:
+    import dotenv
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    dotenv.load_dotenv(BASE_DIR / '.env')
+except ImportError:
+    BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-gigflow-secret-key-change-in-production')
 
